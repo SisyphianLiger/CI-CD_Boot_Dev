@@ -24,7 +24,7 @@ jobs:
       - name: Test API
         run: go test ./... -cover
 
-  formatting:
+  style:
     name: Style
     runs-on: ubuntu-latest
 
@@ -32,10 +32,9 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Set up Go
+      - name: Log Go Formatter
         uses: actions/setup-go@v5
-        with: 
-          go-version: '1.22'
+      
 
       - name: Run Go Formatter
         run: test -z $(go fmt ./...)
