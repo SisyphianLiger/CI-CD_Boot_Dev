@@ -7,7 +7,6 @@ on:
   pull_request:
     branches: [main]
 
-
 jobs:
   tests:
     name: Tests
@@ -22,7 +21,10 @@ jobs:
         with:
           go-version: '1.22'
 
-      - name: Run unit tests
+      - name: Echo Go version
+        run: go version
+
+      - name: Test API
         run: go test ./... -cover
 
   style:
@@ -33,16 +35,16 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Set up Go
+      - name: Log Go Formatter
         uses: actions/setup-go@v5
         with:
           go-version: '1.22'
-
-      - name: Check formatting
+      
+      - name: Run Go Formatter
         run: test -z $(go fmt ./...)
 
-      - name: Install staticcheck
+      - name: Install Static Check
         run: go install honnef.co/go/tools/cmd/staticcheck@latest
 
-      - name: Run staticcheck
+      - name: Run Static Check
         run: staticcheck ./...
