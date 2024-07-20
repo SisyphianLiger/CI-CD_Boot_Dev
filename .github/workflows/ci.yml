@@ -48,3 +48,21 @@ jobs:
 
       - name: Run Static Check
         run: staticcheck ./...
+
+  Security:
+    name: Security Check
+    runs-on: ubuntu-lates
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Log Go Formatter
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Install gosec
+        run: go install github.com/securego/gosec/v2/cmd/gosec@latest
+
+
