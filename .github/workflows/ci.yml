@@ -1,6 +1,9 @@
 name: ci
 
 on:
+  push:
+    branches:
+      [main]
   pull_request:
     branches: [main]
 
@@ -38,3 +41,11 @@ jobs:
 
       - name: Run Go Formatter
         run: test -z $(go fmt ./...)
+
+      - name: Install Static Check
+        run: go install honnef.co/go/tools/cmd/staticcheck@latest
+
+      - name: Run Static Check
+        run: staticcheck ./...
+
+
